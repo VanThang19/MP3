@@ -2,8 +2,7 @@ import actionTypes from "../actions/actionTypes";
 
 //  Tạo giá trị khởi tạo cho Reducer
 const initState = {
-    homeData: [],
-    test: () => 'test reducer'
+    banner: []
 }
 
 // state : biến lưu giá trị của Reducer quản lí 
@@ -11,7 +10,10 @@ const initState = {
 const appReducer = (state = initState, action) => {
     switch (action.type) {
         case actionTypes.GET_HOME:
-            return state
+            return {
+                ...state,
+                banner: action.homeData?.find(item => item.sectionType === 'banner')?.items || null
+            }
         default:
             return state
     }

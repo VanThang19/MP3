@@ -1,10 +1,12 @@
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useState } from 'react';
-import { Home, Public, Login } from './containers/public/Index'
+import { useEffect, useState } from 'react';
+import { Home, Public, Login, Personal } from './containers/public/Index'
 import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import Path from './ultis/Path'
+import * as actions from './store/actions'
+import { UseDispatch } from 'react-redux';
 
 // useSelector : lấy dữ liệu từ redux
 // useDispatch : đẩy sự kiện action đến redux
@@ -17,6 +19,10 @@ import Path from './ultis/Path'
 
 function App() {
 
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(actions.getHomePage())
+  }, [])
   return (
     <>
 
@@ -25,6 +31,8 @@ function App() {
           <Route path={Path.PUBLIC} element={<Public />} >
             <Route path={Path.HOME} element={<Home />} />
             <Route path={Path.LOGIN} element={<Login />} />
+            <Route path={Path.MY_MUSIC} element={<Personal />} />
+
 
             <Route path={Path.STAR} element={<Home />} />
 

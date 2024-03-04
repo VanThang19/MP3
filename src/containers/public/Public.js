@@ -5,7 +5,7 @@ import { SidebarLeft, SidebarRight } from '../../components'
 // Outlet - Route : được sử dụng để hiển thị nội dung của các tuyến con trong một tuyến cha
 const Public = () => {
     return (
-        <div className='w-full flex ' >
+        <div className='w-full flex bg-[#CED9D9]' >
             <div className='w-[240px] flex-none border border-blue-500' >
                 <SidebarLeft />
             </div>

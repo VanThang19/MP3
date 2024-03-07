@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getArrSlider } from '../ultis/fn'
 import * as actions from '../store/actions'
 
+
 const Slider = () => {
 
     const { banner } = useSelector(state => state.app)
@@ -48,7 +49,13 @@ const Slider = () => {
     }, [])
 
     const handleClickBanner = (item) => {
-        dispatch(actions.setCurSongId(item.encodeId))
+        if (item?.type === 1) {
+            dispatch(actions.setCurSongId(item.encodeId))
+            dispatch(actions.play(true))
+        } else if (item?.type === 4) {
+            console.log(item)
+        }
+
     }
 
     return (

@@ -3,7 +3,7 @@ import axios from "../Axios"
 export const getHomePage = () => new Promise(async (resolve, reject) => {
     try {
         const response = await axios({
-            url: '/api/home',
+            url: '/home',
             method: 'get'
         })
         resolve(response)

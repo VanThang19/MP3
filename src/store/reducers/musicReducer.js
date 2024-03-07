@@ -2,7 +2,8 @@ import actionTypes from "../actions/actionTypes";
 
 //  Tạo giá trị khởi tạo cho Reducer
 const initState = {
-    curSongId: null
+    curSongId: null,
+    isPlaying: false
 }
 
 // state : biến lưu giá trị của Reducer quản lí 
@@ -14,6 +15,11 @@ const musicReducer = (state = initState, action) => {
             return {
                 ...state,
                 curSongId: action.payload || null
+            }
+        case actionTypes.PLAY:
+            return {
+                ...state,
+                isPlaying: action.flag
             }
 
         default:

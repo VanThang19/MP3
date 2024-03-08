@@ -12,8 +12,6 @@ const Player = () => {
     const [songInfo, setSongInfo] = useState(null)
     const [source, setSource] = useState(null)
     // const [isPlaying, setIsPlaying] = useState(false)
-
-    // bug : ko tìm thấy bài hát
     useEffect(() => {
         const fetchDetailSong = async () => {
             const [res1, res2] = await Promise.all([

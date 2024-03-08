@@ -2,14 +2,15 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getArrSlider } from '../ultis/fn'
 import * as actions from '../store/actions'
-
+import { useNavigate } from 'react-router-dom'
 
 const Slider = () => {
 
     const { banner } = useSelector(state => state.app)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    // di chuyen banner image
+
     // ainimation for banner
     useEffect(() => {
         const sliderEls = document.getElementsByClassName('slider-item')
@@ -42,7 +43,7 @@ const Slider = () => {
             })
             min = (min === sliderEls.length - 1) ? 0 : min + 1
             max = (max === sliderEls.length - 1) ? 0 : max + 1
-        }, 3000)
+        }, 2500)
         return () => {
             intervalId && clearInterval(intervalId)
         }
@@ -53,9 +54,9 @@ const Slider = () => {
             dispatch(actions.setCurSongId(item.encodeId))
             dispatch(actions.play(true))
         } else if (item?.type === 4) {
-            console.log(item)
+            const albumPath = item?.link?.split('.')[0]
+            navigate(albumPath)
         }
-
     }
 
     return (
@@ -66,7 +67,7 @@ const Slider = () => {
                         key={item.encodeId}
                         src={item.banner}
                         onClick={() => handleClickBanner(item)}
-                        className={`slide-item flex-1 object-contain w-[30%] rounded-lg ${index <= 2 ? 'block' : 'hidden'}`}
+                        className={`slider-item flex-1 object-contain w-[30%] rounded-lg ${index <= 2 ? 'block' : 'hidden'}`}
                     />
                 ))}
             </div>

@@ -1,9 +1,9 @@
 import actionTypes from "./actionTypes";
 import * as apis from '../../apis'
-
 export const getHomePage = () => async (dispatch) => {
     try {
         const response = await apis.getHomePage()
+
         if (response?.data.err === 0) {
             dispatch({
                 type: actionTypes.GET_HOME,

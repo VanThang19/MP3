@@ -2,7 +2,7 @@ import actionTypes from "../actions/actionTypes";
 
 //  Tạo giá trị khởi tạo cho Reducer
 const initState = {
-    banner: []
+    banner: [],
 }
 
 // state : biến lưu giá trị của Reducer quản lí 

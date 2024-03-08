@@ -17,7 +17,7 @@ const Header = () => {
         </div>
       </div>
       <div>
-        dang nhap
+        Login
       </div>
     </div>
   )

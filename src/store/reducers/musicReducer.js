@@ -14,7 +14,7 @@ const musicReducer = (state = initState, action) => {
         case actionTypes.SET_CUR_SONG_ID:
             return {
                 ...state,
-                curSongId: action.payload || null
+                curSongId: action.sid || null
             }
         case actionTypes.PLAY:
             return {

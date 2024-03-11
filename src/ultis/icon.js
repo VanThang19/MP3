@@ -4,9 +4,9 @@ import { IoSearchCircleOutline, IoRepeatOutline } from 'react-icons/io5'
 import { LiaChartLineSolid } from "react-icons/lia";
 import { AiTwotoneFileText } from "react-icons/ai";
 import { PiArrowRightThin } from "react-icons/pi";
-import { PiArrowLeftThin, PiShuffleFill } from "react-icons/pi";
+import { PiArrowLeftThin, PiShuffleFill, PiMusicNotesSimple } from "react-icons/pi";
 import { GoSearch, GoHeart, GoHeartFill } from "react-icons/go";
-import { BsThreeDots, BsPlayFill, BsPauseFill } from "react-icons/bs";
+import { BsThreeDots, BsPlayFill, BsPauseFill, BsDot } from "react-icons/bs";
 import { IoMdSkipBackward, IoMdSkipForward } from "react-icons/io";
 
 
@@ -26,6 +26,8 @@ const icons = {
     IoMdSkipBackward,
     PiShuffleFill,
     BsPlayFill,
-    BsPauseFill
+    BsPauseFill,
+    BsDot,
+    PiMusicNotesSimple
 }
 export default icons

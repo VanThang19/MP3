@@ -54,8 +54,10 @@ const Slider = () => {
             dispatch(actions.setCurSongId(item.encodeId))
             dispatch(actions.play(true))
         } else if (item?.type === 4) {
+            // console.log(item)
             const albumPath = item?.link?.split('.')[0]
             navigate(albumPath)
+
         }
     }
 

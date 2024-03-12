@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState, useRef } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import * as apis from '../apis'
 import icons from '../ultis/icon'
+import * as actions from '../store/actions'
+
 
 const { GoHeart, GoHeartFill, BsThreeDots, IoMdSkipForward, IoMdSkipBackward, IoRepeatOutline, PiShuffleFill, BsPauseFill, BsPlayFill } = icons
 
 const Player = () => {
 
-    const audioEl = new Audio()
+    const audioEl = useRef(new Audio())
+    const dispatch = useDispatch()
+
     const { curSongId, isPlaying } = useSelector(state => state.music)
     const [songInfo, setSongInfo] = useState(null)
     const [source, setSource] = useState(null)
+
     // const [isPlaying, setIsPlaying] = useState(false)
     useEffect(() => {
         const fetchDetailSong = async () => {
@@ -28,12 +33,40 @@ const Player = () => {
         fetchDetailSong()
     }, [curSongId])
 
-    useEffect(() => {
+    // useEffect(() => {
+    //     // .play(true) : Hàm bất đồng bộ || https://developer.chrome.com/blog/play-request-was-interrupted?hl=vi : fix lỗi
+    //     audioEl.current.pause()
+    //     audioEl.current.src = source
+    //     audioEl.current.load()
+    //     if (isPlaying) audioEl.current.play(true)
 
-    }, [curSongId])
+    // }, [curSongId, source])
+
+    useEffect(() => {
+        const playAudio = async () => {
+            try {
+                await audioEl.current.pause(); // Dừng phát âm thanh hiện tại
+                audioEl.current.src = source; // Đặt nguồn âm thanh mới
+                await audioEl.current.load(); // Tải lại âm thanh mới
+                if (isPlaying) await audioEl.current.play(); // Nếu đang phát, tiến hành phát âm thanh mới
+            } catch (error) {
+
+                // Xử lý lỗi nếu cần
+            }
+        };
+
+        playAudio(); // Gọi hàm playAudio()
+
+    }, [curSongId, source, isPlaying]);
 
     const handleTogglePlayMusic = () => {
-        // setIsPlaying(prev => !prev)
+        if (isPlaying) {
+            audioEl.current.pause()
+            dispatch(actions.play(false))
+        } else {
+            audioEl.current.play()
+            dispatch(actions.play(true))
+        }
     }
 
     return (

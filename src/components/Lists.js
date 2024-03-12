@@ -7,9 +7,10 @@ const { BsDot } = icons
 
 const Lists = ({ songs, totalDuration }) => {
 
-    console.log({ songs, totalDuration })
     return (
-        <div className='w-full felx flex-col text-xs text-gray-600 '>
+        <div
+            className='w-full felx flex-col text-xs text-gray-600 '
+        >
             <div className='flex justify-between items-center p-[10px] font-semibold' >
                 <span>BÀI HÁT</span>
                 <span>ALBUM</span>
@@ -20,9 +21,9 @@ const Lists = ({ songs, totalDuration }) => {
                     <ListItemSong key={item.encodeId} songData={item} />
                 ))}
             </div>
-            <span className=' flex items-center gap-2'>
+            <span className=' flex items-center gap-1 py-[10px] border-t border-[rgba(0,0,0,0.05)] '>
                 <span>{`${songs?.length} bài hát`}</span>
-                <BsDot />
+                <BsDot size={24} />
                 <span>{moment.utc(totalDuration * 1000).format('HH : mm : ss')}</span>
             </span>
         </div>

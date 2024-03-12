@@ -33,12 +33,11 @@ function App() {
             <Route path={Path.LOGIN} element={<Login />} />
             <Route path={Path.MY_MUSIC} element={<Personal />} />
             <Route path={Path.ALBUM__TITLE__PID} element={<Album />} />
+            <Route path={Path.PLAYLIST__TITLE__PID} element={<Album />} />
 
 
 
             <Route path={Path.STAR} element={<Home />} />
-
-
           </Route>
         </Routes>
       </div>

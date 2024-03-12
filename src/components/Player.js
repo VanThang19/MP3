@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import * as apis from '../apis'
 import icons from '../ultis/icon'
 import * as actions from '../store/actions'
+import moment from 'moment'
 
 
 const { GoHeart, GoHeartFill, BsThreeDots, IoMdSkipForward, IoMdSkipBackward, IoRepeatOutline, PiShuffleFill, BsPauseFill, BsPlayFill } = icons
-
+var intervalId
 const Player = () => {
 
     const audioEl = useRef(new Audio())
@@ -15,8 +16,11 @@ const Player = () => {
     const { curSongId, isPlaying } = useSelector(state => state.music)
     const [songInfo, setSongInfo] = useState(null)
     const [source, setSource] = useState(null)
+    const thumbRef = useRef()
+    const [curSeconds, setcurSeconds] = useState(0)
 
-    // const [isPlaying, setIsPlaying] = useState(false)
+
+    // lấy dữ liệu đã gọi được từ api
     useEffect(() => {
         const fetchDetailSong = async () => {
             const [res1, res2] = await Promise.all([
@@ -33,15 +37,24 @@ const Player = () => {
         fetchDetailSong()
     }, [curSongId])
 
-    // useEffect(() => {
-    //     // .play(true) : Hàm bất đồng bộ || https://developer.chrome.com/blog/play-request-was-interrupted?hl=vi : fix lỗi
-    //     audioEl.current.pause()
-    //     audioEl.current.src = source
-    //     audioEl.current.load()
-    //     if (isPlaying) audioEl.current.play(true)
+    //animation processbar
+    useEffect(() => {
+        if (isPlaying) {
+            intervalId = setInterval(() => {
+                let percent = Math.round(audioEl.current.currentTime * 10000 / songInfo.duration) / 100
+                thumbRef.current.style.cssText = `right : ${100 - percent}%`
+                setcurSeconds(Math.round(audioEl.current.currentTime))
+            }, 50);
+        } else {
 
-    // }, [curSongId, source])
+            intervalId && clearInterval(intervalId)
 
+        }
+
+    }, [isPlaying])
+
+
+    // .play(true) : Hàm bất đồng bộ || https://developer.chrome.com/blog/play-request-was-interrupted?hl=vi : fix lỗi
     useEffect(() => {
         const playAudio = async () => {
             try {
@@ -50,13 +63,10 @@ const Player = () => {
                 await audioEl.current.load(); // Tải lại âm thanh mới
                 if (isPlaying) await audioEl.current.play(); // Nếu đang phát, tiến hành phát âm thanh mới
             } catch (error) {
-
                 // Xử lý lỗi nếu cần
             }
         };
-
         playAudio(); // Gọi hàm playAudio()
-
     }, [curSongId, source, isPlaying]);
 
     const handleTogglePlayMusic = () => {
@@ -99,8 +109,12 @@ const Player = () => {
                     <span className='cursor-pointer' ><IoMdSkipForward size={24} /></span>
                     <span className='cursor-pointer' title='Bật phát lại tất cả' ><IoRepeatOutline size={24} /></span>
                 </div>
-                <div>
-                    process bar
+                <div className='w-full flex items-center justify-center gap-2 text-xs '>
+                    <span className=''>{moment.utc(curSeconds * 1000).format('mm:ss')}</span>
+                    <div className='w-3/4 h-[3px] rounded-l-full rounded-r-full relative bg-[rgba(0,0,0,0.1)]'>
+                        <div ref={thumbRef} className='absolute top-0 left-0 h-[3px] rounded-l-full rounded-r-full bg-[#0e8080] ' ></div>
+                    </div>
+                    <span >{moment.utc(songInfo?.duration * 1000).format('mm:ss')}</span>
                 </div>
             </div>
             <div className='w-[30%] flex-auto border border-blue-400' >

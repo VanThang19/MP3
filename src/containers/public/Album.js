@@ -6,6 +6,7 @@ import { Lists } from '../../components'
 import { Scrollbars } from 'react-custom-scrollbars-2';
 
 
+
 const Album = () => {
 
     const { pid } = useParams()

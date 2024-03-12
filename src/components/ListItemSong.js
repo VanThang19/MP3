@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import icons from '../ultis/icon'
 import moment from 'moment'
-import { UseDispatch, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as actions from '../store/actions'
 
 const { PiMusicNotesSimple } = icons

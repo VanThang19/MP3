@@ -4,18 +4,20 @@ import * as apis from '../apis'
 import icons from '../ultis/icon'
 import * as actions from '../store/actions'
 import moment from 'moment'
+import { toast } from 'react-toastify'
+
 
 
 const { GoHeart, GoHeartFill, BsThreeDots, IoMdSkipForward, IoMdSkipBackward, IoRepeatOutline, PiShuffleFill, BsPauseFill, BsPlayFill } = icons
 var intervalId
 const Player = () => {
 
-    const audioEl = useRef(new Audio())
+    const [audio, setAudio] = useState(new Audio())
     const dispatch = useDispatch()
 
     const { curSongId, isPlaying } = useSelector(state => state.music)
     const [songInfo, setSongInfo] = useState(null)
-    const [source, setSource] = useState(null)
+    // const [source, setSource] = useState(null)
     const thumbRef = useRef()
     const [curSeconds, setcurSeconds] = useState(0)
 
@@ -31,7 +33,14 @@ const Player = () => {
                 setSongInfo(res1.data.data)
             }
             if (res2.data.err === 0) {
-                setSource(res2.data.data['128'])
+                audio.pause()
+                setAudio(new Audio(res2.data.data['128']))
+            } else {
+                setAudio(new Audio())
+                dispatch(actions.play(false))
+                toast.warn(res2?.data.msg)
+                setcurSeconds(0)
+                thumbRef.current.style.cssText = `right :100%`
             }
         }
         fetchDetailSong()
@@ -39,42 +48,42 @@ const Player = () => {
 
     //animation processbar
     useEffect(() => {
+        intervalId && clearInterval(intervalId)
+        audio.pause()
+        audio.load()
+        audio.currentTime = 0
         if (isPlaying) {
+            audio.play()
             intervalId = setInterval(() => {
-                let percent = Math.round(audioEl.current.currentTime * 10000 / songInfo.duration) / 100
+
+                let percent = Math.round(audio.currentTime * 10000 / songInfo.duration) / 100
                 thumbRef.current.style.cssText = `right : ${100 - percent}%`
-                setcurSeconds(Math.round(audioEl.current.currentTime))
-            }, 50);
-        } else {
-
-            intervalId && clearInterval(intervalId)
-
+                setcurSeconds(Math.round(audio.currentTime))
+            }, 50)
         }
-
-    }, [isPlaying])
-
+    }, [audio, isPlaying])
 
     // .play(true) : Hàm bất đồng bộ || https://developer.chrome.com/blog/play-request-was-interrupted?hl=vi : fix lỗi
-    useEffect(() => {
-        const playAudio = async () => {
-            try {
-                await audioEl.current.pause(); // Dừng phát âm thanh hiện tại
-                audioEl.current.src = source; // Đặt nguồn âm thanh mới
-                await audioEl.current.load(); // Tải lại âm thanh mới
-                if (isPlaying) await audioEl.current.play(); // Nếu đang phát, tiến hành phát âm thanh mới
-            } catch (error) {
-                // Xử lý lỗi nếu cần
-            }
-        };
-        playAudio(); // Gọi hàm playAudio()
-    }, [curSongId, source, isPlaying]);
+    // useEffect(() => {
+    //     const playAudio = async () => {
+    //         try {
+    //             await audioEl.current.pause(); // Dừng phát âm thanh hiện tại
+    //             audioEl.current.src = source; // Đặt nguồn âm thanh mới
+    //             await audioEl.current.load(); // Tải lại âm thanh mới
+    //             if (isPlaying) await audioEl.current.play(); // Nếu đang phát, tiến hành phát âm thanh mới
+    //         } catch (error) {
+    //             // Xử lý lỗi nếu cần
+    //         }
+    //     };
+    //     playAudio(); // Gọi hàm playAudio()
+    // }, [curSongId, source, isPlaying]);
 
     const handleTogglePlayMusic = () => {
         if (isPlaying) {
-            audioEl.current.pause()
+            audio.pause()
             dispatch(actions.play(false))
         } else {
-            audioEl.current.play()
+            audio.play()
             dispatch(actions.play(true))
         }
     }

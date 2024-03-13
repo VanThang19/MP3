@@ -15,11 +15,12 @@ const Player = () => {
     const [audio, setAudio] = useState(new Audio())
     const dispatch = useDispatch()
 
-    const { curSongId, isPlaying } = useSelector(state => state.music)
+    const { curSongId, isPlaying, songs } = useSelector(state => state.music)
     const [songInfo, setSongInfo] = useState(null)
     // const [source, setSource] = useState(null)
     const thumbRef = useRef()
     const [curSeconds, setcurSeconds] = useState(0)
+    const trackRef = useRef()
 
 
     // lấy dữ liệu đã gọi được từ api
@@ -36,6 +37,7 @@ const Player = () => {
                 audio.pause()
                 setAudio(new Audio(res2.data.data['128']))
             } else {
+                audio.pause()
                 setAudio(new Audio())
                 dispatch(actions.play(false))
                 toast.warn(res2?.data.msg)
@@ -49,37 +51,59 @@ const Player = () => {
     // .play(true) : Hàm bất đồng bộ || https://developer.chrome.com/blog/play-request-was-interrupted?hl=vi : fix lỗi
     //animation processbar
     useEffect(() => {
-        // Cleanup on unmount or dependency change
         intervalId && clearInterval(intervalId);
-        audio.pause(); // Pause any ongoing playback
-        audio.load(); // Load the audio content
-
-        // Reset playback position
-        audio.currentTime = 0;
-
+        audio.pause();
+        audio.load();
         if (isPlaying) {
             audio.play()
-                .then(() => { // Handle successful playback start
+                .then(() => {
                     intervalId = setInterval(() => {
-                        // Update progress bar and current time every 50ms
-                        let percent = Math.round(audio.currentTime * 10000 / songInfo.duration) / 100;
+                        let percent = Math.round(audio.currentTime * 10000 / songInfo.duration) / 100; //curentTime : tgian hiện tại || duration : tổng tgian bài hát 
                         thumbRef.current.style.cssText = `right: ${100 - percent}%`;
                         setcurSeconds(Math.round(audio.currentTime));
-                    }, 50);
+                    }, 100);
                 })
                 .catch((error) => { // Handle playback errors
-                    console.error('Playback error:', error);
-                    // Consider additional error handling (e.g., retry, display message)
+
                 });
         }
     }, [audio, isPlaying]);
-
+    // handle play music
     const handleTogglePlayMusic = () => {
         if (isPlaying) {
             audio.pause()
             dispatch(actions.play(false))
         } else {
             audio.play()
+            dispatch(actions.play(true))
+        }
+    }
+    // handle processbar
+    const handleClickProcessbar = (e) => {
+        const trackRect = trackRef.current.getBoundingClientRect()
+        const percent = Math.round((e.clientX - trackRect.left) * 10000 / trackRect.width) / 100 // tính toán tỉ lệ % đã chạy trên thanh nhạc
+        //e.clientX: lấy vị trí trục ngang X || trackRect.left : vị trí trên thanh phát nhạc từ bên trái || trackRect.width : lấy khoảng cách click trên thanh phát nhạc
+        thumbRef.current.style.cssText = `right: ${100 - percent}%`; // cập nhật vị trí
+        audio.currentTime = percent * songInfo.duration / 100 // cập nhật tgian phát hiện tại
+        setcurSeconds(Math.round(percent * songInfo.duration / 100))
+    }
+    const handleNextSong = () => {
+        if (songs) {
+            let currentSongIndex
+            songs?.forEach((item, index) => {
+                if (item.encodeId === curSongId) currentSongIndex = index
+            })
+            dispatch(actions.setCurSongId(songs[currentSongIndex + 1].encodeId))
+            dispatch(actions.play(true))
+        }
+    }
+    const handleBackSong = () => {
+        if (songs) {
+            let currentSongIndex
+            songs?.forEach((item, index) => {
+                if (item.encodeId === curSongId) currentSongIndex = index
+            })
+            dispatch(actions.setCurSongId(songs[currentSongIndex - 1].encodeId))
             dispatch(actions.play(true))
         }
     }
@@ -104,20 +128,24 @@ const Player = () => {
             <div className='w-[40%] flex-auto border flex items-center justify-center gap-2 flex-col border-blue-400 py-2' >
                 <div className='flex gap-8 justify-center items-center'>
                     <span className='cursor-pointer' title='Bật phát ngẫu nhiên' ><PiShuffleFill size={24} /></span>
-                    <span className='cursor-pointer' ><IoMdSkipBackward size={24} /></span>
+                    <span onClick={handleBackSong} className={`${!songs ? 'text-gray-500' : 'cursor-pointer'}`} ><IoMdSkipBackward size={24} /></span>
                     <span
                         className='p-1 border border-gray-700 cursor-pointer hover:text-emerald-500 rounded-full'
                         onClick={handleTogglePlayMusic}
                     >
                         {isPlaying ? <BsPauseFill size={30} /> : <BsPlayFill size={30} />}
                     </span>
-                    <span className='cursor-pointer' ><IoMdSkipForward size={24} /></span>
+                    <span onClick={handleNextSong} className={`${!songs ? 'text-gray-500' : 'cursor-pointer'}`} ><IoMdSkipForward size={24} /></span>
                     <span className='cursor-pointer' title='Bật phát lại tất cả' ><IoRepeatOutline size={24} /></span>
                 </div>
                 <div className='w-full flex items-center justify-center gap-2 text-xs '>
                     <span className=''>{moment.utc(curSeconds * 1000).format('mm:ss')}</span>
-                    <div className='w-3/4 h-[3px] rounded-l-full rounded-r-full relative bg-[rgba(0,0,0,0.1)]'>
-                        <div ref={thumbRef} className='absolute top-0 left-0 h-[3px] rounded-l-full rounded-r-full bg-[#0e8080] ' ></div>
+                    <div
+                        className='w-3/4 h-[3px] hover:h-[6px] rounded-l-full rounded-r-full cursor-pointer relative bg-[rgba(0,0,0,0.1)]'
+                        onClick={handleClickProcessbar}
+                        ref={trackRef}
+                    >
+                        <div ref={thumbRef} className='absolute top-0 left-0 bottom-0 rounded-l-full rounded-r-full bg-[#0e8080] ' ></div>
                     </div>
                     <span >{moment.utc(songInfo?.duration * 1000).format('mm:ss')}</span>
                 </div>

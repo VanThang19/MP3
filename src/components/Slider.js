@@ -53,10 +53,12 @@ const Slider = () => {
         if (item?.type === 1) {
             dispatch(actions.setCurSongId(item.encodeId))
             dispatch(actions.play(true))
-        } else if (item?.type === 4 || 3 || 'song') {
+            dispatch(actions.setPLaylist(null))
+        } else if (item?.type === 4) {
             const albumPath = item?.link?.split('.')[0]
             navigate(albumPath)
-
+        } else {
+            dispatch(actions.setPLaylist(null))
         }
     }
 

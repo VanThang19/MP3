@@ -46,37 +46,33 @@ const Player = () => {
         fetchDetailSong()
     }, [curSongId])
 
+    // .play(true) : Hàm bất đồng bộ || https://developer.chrome.com/blog/play-request-was-interrupted?hl=vi : fix lỗi
     //animation processbar
     useEffect(() => {
-        intervalId && clearInterval(intervalId)
-        audio.pause()
-        audio.load()
-        audio.currentTime = 0
+        // Cleanup on unmount or dependency change
+        intervalId && clearInterval(intervalId);
+        audio.pause(); // Pause any ongoing playback
+        audio.load(); // Load the audio content
+
+        // Reset playback position
+        audio.currentTime = 0;
+
         if (isPlaying) {
             audio.play()
-            intervalId = setInterval(() => {
-
-                let percent = Math.round(audio.currentTime * 10000 / songInfo.duration) / 100
-                thumbRef.current.style.cssText = `right : ${100 - percent}%`
-                setcurSeconds(Math.round(audio.currentTime))
-            }, 50)
+                .then(() => { // Handle successful playback start
+                    intervalId = setInterval(() => {
+                        // Update progress bar and current time every 50ms
+                        let percent = Math.round(audio.currentTime * 10000 / songInfo.duration) / 100;
+                        thumbRef.current.style.cssText = `right: ${100 - percent}%`;
+                        setcurSeconds(Math.round(audio.currentTime));
+                    }, 50);
+                })
+                .catch((error) => { // Handle playback errors
+                    console.error('Playback error:', error);
+                    // Consider additional error handling (e.g., retry, display message)
+                });
         }
-    }, [audio, isPlaying])
-
-    // .play(true) : Hàm bất đồng bộ || https://developer.chrome.com/blog/play-request-was-interrupted?hl=vi : fix lỗi
-    // useEffect(() => {
-    //     const playAudio = async () => {
-    //         try {
-    //             await audioEl.current.pause(); // Dừng phát âm thanh hiện tại
-    //             audioEl.current.src = source; // Đặt nguồn âm thanh mới
-    //             await audioEl.current.load(); // Tải lại âm thanh mới
-    //             if (isPlaying) await audioEl.current.play(); // Nếu đang phát, tiến hành phát âm thanh mới
-    //         } catch (error) {
-    //             // Xử lý lỗi nếu cần
-    //         }
-    //     };
-    //     playAudio(); // Gọi hàm playAudio()
-    // }, [curSongId, source, isPlaying]);
+    }, [audio, isPlaying]);
 
     const handleTogglePlayMusic = () => {
         if (isPlaying) {

@@ -3,6 +3,7 @@ import actionTypes from "../actions/actionTypes";
 //  Tạo giá trị khởi tạo cho Reducer
 const initState = {
     banner: [],
+    chill: {}
 }
 
 // state : biến lưu giá trị của Reducer quản lí 
@@ -12,7 +13,8 @@ const appReducer = (state = initState, action) => {
         case actionTypes.GET_HOME:
             return {
                 ...state,
-                banner: action.homeData?.find(item => item.sectionType === 'banner')?.items || null
+                banner: action.homeData?.find(item => item.sectionId === 'hSlider')?.items || null,
+                chill: action.homeData?.find(item => item.sectionId === 'hEditorTheme') || {},
             }
         default:
             return state

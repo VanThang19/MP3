@@ -31,5 +31,5 @@ const Lists = ({ totalDuration }) => {
         </div>
     )
 }
-
+// memo : hạn chế rerender không cần thiết
 export default memo(Lists)

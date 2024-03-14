@@ -3,7 +3,7 @@ import { MdOutlineLibraryMusic } from 'react-icons/md'
 import { IoSearchCircleOutline, IoRepeatOutline } from 'react-icons/io5'
 import { LiaChartLineSolid } from "react-icons/lia";
 import { AiTwotoneFileText } from "react-icons/ai";
-import { PiArrowRightThin } from "react-icons/pi";
+import { PiArrowRightThin, PiRepeatOnceFill } from "react-icons/pi";
 import { PiArrowLeftThin, PiShuffleFill, PiMusicNotesSimple } from "react-icons/pi";
 import { GoSearch, GoHeart, GoHeartFill } from "react-icons/go";
 import { BsThreeDots, BsPlayFill, BsPauseFill, BsDot } from "react-icons/bs";
@@ -28,6 +28,7 @@ const icons = {
     BsPlayFill,
     BsPauseFill,
     BsDot,
-    PiMusicNotesSimple
+    PiMusicNotesSimple,
+    PiRepeatOnceFill
 }
 export default icons

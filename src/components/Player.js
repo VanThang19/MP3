@@ -8,19 +8,19 @@ import { toast } from 'react-toastify'
 
 
 
-const { GoHeart, GoHeartFill, BsThreeDots, IoMdSkipForward, IoMdSkipBackward, IoRepeatOutline, PiShuffleFill, BsPauseFill, BsPlayFill } = icons
+const { GoHeart, GoHeartFill, BsThreeDots, IoMdSkipForward, IoMdSkipBackward, IoRepeatOutline, PiShuffleFill, BsPauseFill, BsPlayFill, PiRepeatOnceFill } = icons
 var intervalId
 const Player = () => {
 
     const [audio, setAudio] = useState(new Audio())
     const dispatch = useDispatch()
-
     const { curSongId, isPlaying, songs } = useSelector(state => state.music)
     const [songInfo, setSongInfo] = useState(null)
-    // const [source, setSource] = useState(null)
     const thumbRef = useRef()
     const [curSeconds, setcurSeconds] = useState(0)
     const trackRef = useRef()
+    const [isShuffle, setIsShuffle] = useState(false)
+    const [repeatMode, setRepeatMode] = useState(0)
 
 
     // lấy dữ liệu đã gọi được từ api
@@ -68,6 +68,26 @@ const Player = () => {
                 });
         }
     }, [audio, isPlaying]);
+
+    //end music
+    useEffect(() => {
+        const handleEnd = () => {
+            if (isShuffle) {
+                handleShuffle()
+            } else if (repeatMode) {
+                repeatMode === 1 ? handleRepeatOne() : handleNextSong()
+            } else {
+                audio.pause()
+                dispatch(actions.play(false))
+            }
+        }
+        audio.addEventListener('ended', handleEnd)
+
+        return () => {
+            audio.removeEventListener('ended', handleEnd)
+        }
+    }, [audio, isShuffle, repeatMode])
+
     // handle play music
     const handleTogglePlayMusic = () => {
         if (isPlaying) {
@@ -78,7 +98,7 @@ const Player = () => {
             dispatch(actions.play(true))
         }
     }
-    // handle processbar
+    // click - hover processbar
     const handleClickProcessbar = (e) => {
         const trackRect = trackRef.current.getBoundingClientRect()
         const percent = Math.round((e.clientX - trackRect.left) * 10000 / trackRect.width) / 100 // tính toán tỉ lệ % đã chạy trên thanh nhạc
@@ -87,9 +107,10 @@ const Player = () => {
         audio.currentTime = percent * songInfo.duration / 100 // cập nhật tgian phát hiện tại
         setcurSeconds(Math.round(percent * songInfo.duration / 100))
     }
+    // handleclick next song
     const handleNextSong = () => {
         if (songs) {
-            let currentSongIndex
+            let currentSongIndex // tạo mảng rỗng 
             songs?.forEach((item, index) => {
                 if (item.encodeId === curSongId) currentSongIndex = index
             })
@@ -97,6 +118,7 @@ const Player = () => {
             dispatch(actions.play(true))
         }
     }
+    //handleclick back song 
     const handleBackSong = () => {
         if (songs) {
             let currentSongIndex
@@ -106,6 +128,16 @@ const Player = () => {
             dispatch(actions.setCurSongId(songs[currentSongIndex - 1].encodeId))
             dispatch(actions.play(true))
         }
+    }
+    //handle ramdom music
+    const handleShuffle = () => {
+        const ramdomIndex = Math.round(Math.random() * songs?.length) - 1
+        dispatch(actions.setCurSongId(songs[ramdomIndex].encodeId))
+        dispatch(actions.play(true))
+    }
+    // handle repeatOne
+    const handleRepeatOne = () => {
+        audio.play()
     }
 
     return (
@@ -125,9 +157,13 @@ const Player = () => {
                     </span>
                 </div>
             </div>
-            <div className='w-[40%] flex-auto border flex items-center justify-center gap-2 flex-col border-blue-400 py-2' >
+            <div className='w-[40%] flex-auto flex items-center justify-center gap-2 flex-col py-2' >
                 <div className='flex gap-8 justify-center items-center'>
-                    <span className='cursor-pointer' title='Bật phát ngẫu nhiên' ><PiShuffleFill size={24} /></span>
+                    <span
+                        onClick={() => setIsShuffle(prev => !prev)}
+                        className={`cursor-pointer ${isShuffle ? 'text-purple-700' : 'text-black'}`}
+                        title='Bật phát ngẫu nhiên' >
+                        <PiShuffleFill size={24} /></span>
                     <span onClick={handleBackSong} className={`${!songs ? 'text-gray-500' : 'cursor-pointer'}`} ><IoMdSkipBackward size={24} /></span>
                     <span
                         className='p-1 border border-gray-700 cursor-pointer hover:text-emerald-500 rounded-full'
@@ -136,7 +172,13 @@ const Player = () => {
                         {isPlaying ? <BsPauseFill size={30} /> : <BsPlayFill size={30} />}
                     </span>
                     <span onClick={handleNextSong} className={`${!songs ? 'text-gray-500' : 'cursor-pointer'}`} ><IoMdSkipForward size={24} /></span>
-                    <span className='cursor-pointer' title='Bật phát lại tất cả' ><IoRepeatOutline size={24} /></span>
+                    <span
+                        onClick={() => setRepeatMode(prev => prev === 2 ? 0 : prev + 1)}
+                        className={`cursor-pointer ${repeatMode && 'text-purple-700'}`}
+                        title='Bật phát lại tất cả'
+                    >
+                        {repeatMode === 1 ? <PiRepeatOnceFill size={24} /> : <IoRepeatOutline size={24} />}
+                    </span>
                 </div>
                 <div className='w-full flex items-center justify-center gap-2 text-xs '>
                     <span className=''>{moment.utc(curSeconds * 1000).format('mm:ss')}</span>

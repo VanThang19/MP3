@@ -6,5 +6,6 @@ export { default as Search } from "./Search"
 export { default as Slider } from "./Slider"
 export { default as Player } from "./Player"
 export { default as Lists } from "./Lists"
-
-
+export { default as ListItemSong } from "./ListItemSong"
+export { default as Section } from "./Section"
+export { default as AudioLoading } from "./AudioLoading"

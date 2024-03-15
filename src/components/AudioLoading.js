@@ -15,5 +15,5 @@ const AudioLoading = () => {
         />
     )
 }
-
+// memo : hạn chế rerender không cần thiết
 export default memo(AudioLoading)

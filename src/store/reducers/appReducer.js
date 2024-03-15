@@ -3,7 +3,12 @@ import actionTypes from "../actions/actionTypes";
 //  Tạo giá trị khởi tạo cho Reducer
 const initState = {
     banner: [],
-    chill: {}
+    chill: {},
+    RemixMusic: {},
+    MoodMusic: {},
+    Top100: {},
+    Album_Hot: {},
+
 }
 
 // state : biến lưu giá trị của Reducer quản lí 
@@ -15,6 +20,10 @@ const appReducer = (state = initState, action) => {
                 ...state,
                 banner: action.homeData?.find(item => item.sectionId === 'hSlider')?.items || null,
                 chill: action.homeData?.find(item => item.sectionId === 'hEditorTheme') || {},
+                RemixMusic: action.homeData?.find(item => item.sectionId === 'hEditorTheme3') || {},
+                MoodMusic: action.homeData?.find(item => item.sectionId === 'hEditorTheme4') || {},
+                Top100: action.homeData?.find(item => item.sectionId === 'h100') || {},
+                Album_Hot: action.homeData?.find(item => item.sectionId === 'hAlbum') || {},
             }
         default:
             return state

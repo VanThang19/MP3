@@ -8,6 +8,8 @@ import { PiArrowLeftThin, PiShuffleFill, PiMusicNotesSimple } from "react-icons/
 import { GoSearch, GoHeart, GoHeartFill } from "react-icons/go";
 import { BsThreeDots, BsPlayFill, BsPauseFill, BsDot } from "react-icons/bs";
 import { IoMdSkipBackward, IoMdSkipForward } from "react-icons/io";
+import { BiSolidPlaylist } from "react-icons/bi";
+import { FiVolumeX, FiVolume1, FiVolume2 } from "react-icons/fi";
 
 
 const icons = {
@@ -29,6 +31,10 @@ const icons = {
     BsPauseFill,
     BsDot,
     PiMusicNotesSimple,
-    PiRepeatOnceFill
+    PiRepeatOnceFill,
+    BiSolidPlaylist,
+    FiVolume1,
+    FiVolume2,
+    FiVolumeX,
 }
 export default icons

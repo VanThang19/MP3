@@ -5,12 +5,15 @@ import icons from '../ultis/icon'
 import * as actions from '../store/actions'
 import moment from 'moment'
 import { toast } from 'react-toastify'
+import { index } from '../'
 
 
 
-const { GoHeart, GoHeartFill, BsThreeDots, IoMdSkipForward, IoMdSkipBackward, IoRepeatOutline, PiShuffleFill, BsPauseFill, BsPlayFill, PiRepeatOnceFill } = icons
+const { GoHeart, GoHeartFill, BsThreeDots, IoMdSkipForward, FiVolume1, FiVolume2, FiVolumeX,
+    IoMdSkipBackward, IoRepeatOutline, PiShuffleFill, BsPauseFill, BsPlayFill, PiRepeatOnceFill,
+    BiSolidPlaylist } = icons
 var intervalId
-const Player = () => {
+const Player = ({ setIsShowRightSidebar }) => {
 
     const [audio, setAudio] = useState(new Audio())
     const dispatch = useDispatch()
@@ -21,6 +24,7 @@ const Player = () => {
     const trackRef = useRef()
     const [isShuffle, setIsShuffle] = useState(false)
     const [repeatMode, setRepeatMode] = useState(0)
+    const [volume, setVolume] = useState(30)
 
 
     // lấy dữ liệu đã gọi được từ api
@@ -68,6 +72,10 @@ const Player = () => {
                 });
         }
     }, [audio, isPlaying]);
+
+    useEffect(() => {
+        audio.volume = volume / 100
+    }, [volume])
 
     //end music
     useEffect(() => {
@@ -192,8 +200,19 @@ const Player = () => {
                     <span >{moment.utc(songInfo?.duration * 1000).format('mm:ss')}</span>
                 </div>
             </div>
-            <div className='w-[30%] flex-auto border border-blue-400' >
-                Volume
+            <div className='w-[30%] flex-auto flex items-center justify-end gap-4' >
+                <div className='flex items-center gap-2' >
+                    <span onClick={() => setVolume(prev => +prev === 0 ? 30 : 0)} >{+volume >= 50 ? <FiVolume2 /> : +volume === 0 ? <FiVolumeX /> : <FiVolume1 />}</span>
+                    <input
+                        type='range'
+                        step={1}
+                        min={0}
+                        max={100}
+                        value={volume}
+                        onChange={(e) => setVolume(e.target.value)}
+                    ></input>
+                </div>
+                <span onClick={() => setIsShowRightSidebar(prev => !prev)} className='p-1 rounded-sm cursor-pointer bg-main-500 opacity-90 hover:opacity-100' > <BiSolidPlaylist size={24} /></span>
             </div>
         </div>
     )

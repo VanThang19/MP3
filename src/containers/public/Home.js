@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
-import { Slider, Section } from '../../components';
+import { Slider, Section, NewRelease } from '../../components';
 
 
 const Home = () => {
@@ -10,6 +10,7 @@ const Home = () => {
     return (
         <div className='overflow-y-auto'>
             <Slider />
+            <NewRelease />
             <Section data={chill} />
             <Section data={RemixMusic} />
             <Section data={MoodMusic} />

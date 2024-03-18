@@ -8,6 +8,8 @@ const initState = {
     MoodMusic: {},
     Top100: {},
     Album_Hot: {},
+    newRelease: {},
+
 
 }
 
@@ -24,6 +26,8 @@ const appReducer = (state = initState, action) => {
                 MoodMusic: action.homeData?.find(item => item.sectionId === 'hEditorTheme4') || {},
                 Top100: action.homeData?.find(item => item.sectionId === 'h100') || {},
                 Album_Hot: action.homeData?.find(item => item.sectionId === 'hAlbum') || {},
+                newRelease: action.homeData?.find(item => item.sectionType === 'new-release') || {}
+
             }
         default:
             return state

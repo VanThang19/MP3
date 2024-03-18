@@ -1,12 +1,11 @@
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect, useState } from 'react';
-import { Home, Public, Login, Personal, Album } from './containers/public/Index'
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { Home, Public, Login, Personal, Album, WeekRank } from './containers/public/Index'
+import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import Path from './ultis/Path'
 import * as actions from './store/actions'
-import { UseDispatch } from 'react-redux';
 
 // useSelector : lấy dữ liệu từ redux
 // useDispatch : đẩy sự kiện action đến redux
@@ -34,6 +33,8 @@ function App() {
             <Route path={Path.MY_MUSIC} element={<Personal />} />
             <Route path={Path.ALBUM__TITLE__PID} element={<Album />} />
             <Route path={Path.PLAYLIST__TITLE__PID} element={<Album />} />
+            <Route path={Path.WEEKRANK__TITLE__PID} element={<WeekRank />} />
+
 
 
 
@@ -48,7 +49,7 @@ function App() {
         newestOnTop={false}
         closeOnClick
         rtl={false}
-        pauseOnFocusLoss
+        pauseOnFocusLossy
         draggable
         pauseOnHover
         theme="light"

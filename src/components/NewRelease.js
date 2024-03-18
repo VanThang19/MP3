@@ -29,21 +29,21 @@ const NewRelease = () => {
             <div className=' flex items-center gap-5 text-xs'>
                 <button
                     type='button'
-                    className={`py-1 px-4 rounded-l-full rounded-r-full border border-gray-400 bg-transparent ${isActived === 0 ? 'bg-green-800 text-white' : ''}`}
+                    className={`py-1 px-4 rounded-l-full rounded-r-full border border-gray-400 bg-transparent ${isActived === 0 ? 'text-white bg-green-800' : ''}`}
                     onClick={() => setIsActived(0)}
                 >
                     TẤT CẢ
                 </button>
                 <button
                     type='button'
-                    className={`py-1 px-4 rounded-l-full rounded-r-full border border-gray-400 bg-transparent ${isActived === 1 ? 'bg-green-800 text-white' : ''}`}
+                    className={`py-1 px-4 rounded-l-full rounded-r-full border border-gray-400 bg-transparent ${isActived === 1 ? 'text-white bg-green-800' : ''}`}
                     onClick={() => setIsActived(1)}
                 >
                     VIỆT NAM
                 </button>
                 <button
                     type='button'
-                    className={`py-1 px-4 rounded-l-full rounded-r-full border border-gray-400 bg-transparent ${isActived === 2 ? 'bg-green-800 text-white' : ''}`}
+                    className={`py-1 px-4 rounded-l-full rounded-r-full border border-gray-400 bg-transparent ${isActived === 2 ? 'text-white bg-green-800' : ''}`}
                     onClick={() => setIsActived(2)}
                 >
                     QUỐC TẾ
@@ -57,6 +57,7 @@ const NewRelease = () => {
                         title={item.title}
                         artists={item.artistsNames}
                         releaseDate={item.releaseDate}
+                        sid={item.encodeId}
                     />
                 ))}
             </div>

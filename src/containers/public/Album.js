@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import * as apis from '../../apis'
 import moment from 'moment'
 import { Lists, AudioLoading } from '../../components'
@@ -12,11 +12,14 @@ const { BsPlayFill } = icons
 
 const Album = () => {
 
+    const location = useLocation()
+
     const { pid } = useParams()
     const { curSongId, isPlaying, songs } = useSelector(state => state.music)
     const [playlistData, setplaylistData] = useState({})
     const dispatch = useDispatch()
 
+    // lấy dữ liệu đổ về album
     useEffect(() => {
         const fetchDetailPlaylist = async () => {
             const response = await apis.apiGetDetailPlaylist(pid)
@@ -28,6 +31,14 @@ const Album = () => {
         fetchDetailPlaylist()
     }, [pid])
 
+    // quản lí hover nút PLay lấy dữ liệu song
+    useEffect(() => {
+        if (location.state?.playAlbum) {
+            const ramdomSong = Math.round(Math.random() * playlistData?.song?.items?.length) - 1
+            dispatch(actions.setCurSongId(playlistData?.song?.items[ramdomSong]?.encodeId))
+            dispatch(actions.play(true))
+        }
+    }, [pid, playlistData])
     return (
 
         <div className='flex gap-8 w-full h-full px-[59px]'>

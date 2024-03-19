@@ -1,10 +1,7 @@
-import React, { memo, useState } from 'react'
+import React, { memo } from 'react'
 import { HoverMouse } from './'
-import { useNavigate } from 'react-router-dom'
 
 const Section = ({ data }) => {
-
-    const navigate = useNavigate()
 
 
     return (

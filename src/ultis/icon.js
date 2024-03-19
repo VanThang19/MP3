@@ -4,7 +4,7 @@ import { IoSearchCircleOutline, IoRepeatOutline } from 'react-icons/io5'
 import { LiaChartLineSolid } from "react-icons/lia";
 import { AiTwotoneFileText } from "react-icons/ai";
 import { PiArrowRightThin, PiRepeatOnceFill } from "react-icons/pi";
-import { PiArrowLeftThin, PiShuffleFill, PiMusicNotesSimple } from "react-icons/pi";
+import { PiArrowLeftThin, PiShuffleFill, PiMusicNotesSimple, PiPlayCircleThin } from "react-icons/pi";
 import { GoSearch, GoHeart, GoHeartFill } from "react-icons/go";
 import { BsThreeDots, BsPlayFill, BsPauseFill, BsDot } from "react-icons/bs";
 import { IoMdSkipBackward, IoMdSkipForward } from "react-icons/io";
@@ -36,5 +36,6 @@ const icons = {
     FiVolume1,
     FiVolume2,
     FiVolumeX,
+    PiPlayCircleThin
 }
 export default icons

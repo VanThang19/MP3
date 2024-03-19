@@ -36,8 +36,6 @@ function App() {
             <Route path={Path.WEEKRANK__TITLE__PID} element={<WeekRank />} />
 
 
-
-
             <Route path={Path.STAR} element={<Home />} />
           </Route>
         </Routes>

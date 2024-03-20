@@ -49,16 +49,17 @@ const NewRelease = () => {
                     QUỐC TẾ
                 </button>
             </div>
-            <div className='flex flex-wrap w-full' >
+            <div className='flex flex-wrap w-full justify-between' >
                 {SongNewRelease?.slice(0, 15).map(item => (
-                    <SongItem
-                        key={item.encodeId}
-                        thumbnail={item.thumbnail}
-                        title={item.title}
-                        artists={item.artistsNames}
-                        releaseDate={item.releaseDate}
-                        sid={item.encodeId}
-                    />
+                    <div key={item.encodeId} className='w-[45%] min-[1080px]:w-[30%]'>
+                        <SongItem
+                            thumbnail={item.thumbnail}
+                            title={item.title}
+                            artists={item.artistsNames}
+                            releaseDate={item.releaseDate}
+                            sid={item.encodeId}
+                        />
+                    </div>
                 ))}
             </div>
         </div>

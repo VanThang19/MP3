@@ -1,13 +1,23 @@
-import React, { memo, useState, useEffect } from 'react'
+import React, { memo, useState, useEffect, useRef } from 'react'
 import { Line } from 'react-chartjs-2';
 import { Chart } from 'chart.js/auto'
 import bgchart from '../image/bg_chart.jpg'
 import { useSelector } from 'react-redux';
+import { SongItem } from './'
+import _ from 'lodash'
 
 const ChartMusic = () => {
 
     const [data, setData] = useState(null)
     const { chart, rank } = useSelector(state => state.app)
+    const chartRef = useRef()
+    const [tooltipState, setTooltipState] = useState({
+        opacity: 0,
+        top: 0,
+        left: 0,
+    })
+    const [tooltipData, setTooltipData] = useState(null)
+
 
     const options = {
         responsive: true,
@@ -27,7 +37,30 @@ const ChartMusic = () => {
             }
         },
         plugins: {
-            legend: false
+            legend: false,
+            tooltip: {
+                enabled: false,
+                external: (ctx) => {
+                    const data = []
+                    for (let i = 0; i < 3; i++)
+                        data.push({
+                            encodeId: Object.keys(chart?.items)[i],
+                            data: chart?.items[Object.keys(chart?.items)[i]]?.filter(item => +item.hour % 2 === 0)?.map(item => item.counter)
+                        })
+                    const tooltipModel = ctx.tooltip
+                    setTooltipData(data.find(i => i.data.some(n => n === +tooltipModel.body[0].lines[0].replace(',', '')))?.encodeId)
+                    if (tooltipModel.opacity === 0) {
+                        if (tooltipState.opacity !== 0) setTooltipState(prev => ({ ...prev, opacity: 0 }))
+                        return
+                    }
+                    const newTooltipData = {
+                        opacity: 1,
+                        left: tooltipModel.caretX,
+                        top: tooltipModel.caretY,
+                    }
+                    if (!_.isEqual(tooltipState, newTooltipData)) setTooltipState(newTooltipData)
+                }
+            }
         },
         hover: {
             mode: 'dataset',
@@ -57,17 +90,38 @@ const ChartMusic = () => {
     }, [chart])
 
     return (
-        <div className='px-[59px] mt-12 relative max-h-[350px]' >
-            <img src={bgchart} alt='bg-chart' className='w-full object-cover rounded-md max-h-[350px]' />
-            <div className='absolute  top-0 bottom-0 left-[59px] bg-[rgba(77,34,104,0.9)] right-[59px] z-10 ' ></div>
-            <div className='absolute top-0 bottom-0 left-[59px] right-[59px] z-20 p-5 flex flex-col '>
-                <h3 className='text-2xl text-white font-bold' >#Zingchart</h3>
-                <div className='flex gap-4 h-full' >
-                    <div className='flex-3 border border-white' >
-                        rank
+        <div className='px-[59px] mt-12 relative max-h-[400px]'>
+            <img src={bgchart} alt="bg-chart" className='w-full object-cover rounded-md max-h-[400px]' />
+            <div className='absolute top-0 z-10 left-[59px] bg-[rgba(77,34,104,0.9)] right-[59px] bottom-0'></div>
+            <div className='absolute top-0 z-20 left-[59px] right-[59px] bottom-0 p-5 flex flex-col gap-8'>
+                <h3 className='text-2xl text-white font-bold'>#zingchart</h3>
+                <div className='flex gap-4 h-full'>
+                    <div className='flex-3 flex flex-col gap-4'>
+                        {rank?.filter((i, index) => index < 3)?.map((item, index) => (
+                            <SongItem
+                                thumbnail={item.thumbnail}
+                                title={item.title.length > 20 ? `${item.title.slice(0, 20)}...` : item.title}
+                                artists={item.artistsNames}
+                                sid={item.encodeId}
+                                order={index + 1}
+                                percent={Math.round(+item.score * 100 / +chart?.totalScore)}
+                                style='text-white bg-[hsla(293,24%,34%,0.7)] hover:bg-[#945EA7]'
+                            />
+                        ))}
                     </div>
-                    <div className='flex-7 h-full ' >
-                        {data && <Line data={data} options={options} />}
+                    <div className='flex-7 h-[90%] relative cursor-pointer'>
+                        {data && <Line data={data} ref={chartRef} options={options} />}
+                        <div
+                            className='tooltip' style={{ top: tooltipState.top, left: tooltipState.left, opacity: tooltipState.opacity, position: 'absolute' }}
+                        >
+                            <SongItem
+                                thumbnail={rank?.find(i => i.encodeId === tooltipData)?.thumbnail}
+                                title={rank?.find(i => i.encodeId === tooltipData)?.title}
+                                artists={rank?.find(i => i.encodeId === tooltipData)?.artistsNames}
+                                sid={rank?.find(i => i.encodeId === tooltipData)?.encodeId}
+                                style='bg-white'
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

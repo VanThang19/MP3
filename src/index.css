@@ -5,3 +5,15 @@
 input[type="range"]{
     accent-color: #0e8080;
 }
+.text-shadow-first {
+    text-shadow: 1px 1px 0 rgb(74, 144, 226), -1px 1px 0 rgb(74, 144, 226), -1px -1px 0 rgb(74, 144, 226),
+    1px -1px 0 rgb(74, 144, 226), ;
+}
+.text-shadow-second {
+    text-shadow: 1px 1px 0 rgb(80, 227, 194), -1px 1px 0 rgb(80, 227, 194), -1px -1px 0 rgb(80, 227, 194),
+    1px -1px 0 rgb(80, 227, 194), ;
+}
+.text-shadow-third {
+    text-shadow: 1px 1px 0 rgb(227, 80, 80), -1px 1px 0 rgb(227, 80, 80), -1px -1px 0 rgb(227, 80, 80),
+    1px -1px 0 rgb(227, 80, 80), ;
+}

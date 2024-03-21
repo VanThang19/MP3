@@ -10,6 +10,7 @@ import { BsThreeDots, BsPlayFill, BsPauseFill, BsDot } from "react-icons/bs";
 import { IoMdSkipBackward, IoMdSkipForward } from "react-icons/io";
 import { BiSolidPlaylist } from "react-icons/bi";
 import { FiVolumeX, FiVolume1, FiVolume2 } from "react-icons/fi";
+import { RiDeleteBin5Line } from "react-icons/ri";
 
 
 const icons = {
@@ -36,6 +37,7 @@ const icons = {
     FiVolume1,
     FiVolume2,
     FiVolumeX,
-    PiPlayCircleThin
+    PiPlayCircleThin,
+    RiDeleteBin5Line
 }
 export default icons

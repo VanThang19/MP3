@@ -6,9 +6,6 @@ const NewRelease = () => {
     const { newRelease } = useSelector(state => state.app)
     const [isActived, setIsActived] = useState(null)
     const [SongNewRelease, setSongNewRelease] = useState([])
-    // useEffect(() => {
-    //     isActived ? setSongNewRelease(newRelease?.items?.others) : setSongNewRelease(newRelease?.items?.vPop)
-    // }, [isActived, newRelease])
 
     useEffect(() => {
         if (isActived === 0) {

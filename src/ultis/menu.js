@@ -14,7 +14,7 @@ export const sidebarMenu = [
         icons: <IoSearchCircleOutline size={26} />
     },
     {
-        Path: 'zing-chart',
+        Path: 'zingchart',
         text: '#zingchart',
         icons: <LiaChartLineSolid size={24} />
     },

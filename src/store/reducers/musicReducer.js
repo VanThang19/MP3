@@ -3,6 +3,7 @@ import actionTypes from "../actions/actionTypes";
 //  Tạo giá trị khởi tạo cho Reducer
 const initState = {
     curSongId: null,
+    curSongData: null,
     isPlaying: false,
     atAlbum: false,
     songs: null
@@ -17,6 +18,11 @@ const musicReducer = (state = initState, action) => {
             return {
                 ...state,
                 curSongId: action.sid || null
+            }
+        case actionTypes.SET_CUR_SONG_DATA:
+            return {
+                ...state,
+                curSongData: action.data || null
             }
         case actionTypes.PLAY:
             return {

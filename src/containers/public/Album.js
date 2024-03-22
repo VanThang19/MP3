@@ -21,6 +21,7 @@ const Album = () => {
 
     // lấy dữ liệu đổ về album
     useEffect(() => {
+        dispatch(actions.setcurAlbumID(pid))
         const fetchDetailPlaylist = async () => {
             const response = await apis.apiGetDetailPlaylist(pid)
             if (response?.data.err === 0) {

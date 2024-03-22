@@ -6,7 +6,9 @@ const initState = {
     curSongData: null,
     isPlaying: false,
     atAlbum: false,
-    songs: null
+    songs: null,
+    curAlbumId: null,
+    recentSongs: []
 }
 
 // state : biến lưu giá trị của Reducer quản lí 
@@ -39,7 +41,26 @@ const musicReducer = (state = initState, action) => {
                 ...state,
                 songs: action.songs || null
             }
-
+        case actionTypes.SET_CUR_ALBUM_ID:
+            return {
+                ...state,
+                curAlbumId: action.pid || null
+            }
+        case actionTypes.SET_RECENT:
+            let songs = state.recentSongs
+            if (action.data) {
+                if (state.recentSongs?.some(i => i.sid === action.data.sid)) {
+                    songs = songs.filter((i) => i.sid !== action.data.sid)
+                }
+                if (songs.length >= 20) {
+                    songs = songs.filter((i, index, self) => index !== self.length - 1)
+                }
+                songs = [action.data, ...songs]
+            }
+            return {
+                ...state,
+                recentSongs: songs
+            }
         default:
             return state
     }

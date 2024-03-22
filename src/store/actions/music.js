@@ -22,7 +22,14 @@ export const setcurSongData = (data) => ({
     type: actionTypes.SET_CUR_SONG_DATA,
     data
 })
-
+export const setcurAlbumID = (pid) => ({
+    type: actionTypes.SET_CUR_ALBUM_ID,
+    pid
+})
+export const setReCent = (data) => ({
+    type: actionTypes.SET_RECENT,
+    data
+})
 // export const fetchDetailPlaylist = (pid) => async (dispatch) => {
 //     try {
 //         const response = await apis.apiGetDetailPlaylist(pid)

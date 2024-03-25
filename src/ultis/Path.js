@@ -8,8 +8,10 @@ const Path = {
     PLAYLIST__TITLE__PID: 'playlist/:title/:pid',
     WEEKRANK__TITLE__PID: 'zing-chart-tuan/:title/:pid',
     ZING_CHART: 'zingchart',
-    FOLLOW: 'follow'
-
+    FOLLOW: 'follow',
+    SEARCH: 'tim-kiem',
+    ALL: 'tat-ca',
+    SONG: 'bai-hat',
 
 }
 export default Path 

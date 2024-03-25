@@ -105,7 +105,7 @@ const ChartMusic = () => {
                     <span className='rounded-full p-1 bg-white' ><BsPlayFill size={20} color='black' /></span>
                 </Link>
                 <div className='flex gap-4 h-full'>
-                    <div className='flex-3 flex flex-col gap-4'>
+                    <div className='flex-4 flex flex-col gap-4'>
                         {rank?.filter((i, index) => index < 3)?.map((item, index) => (
                             <SongItem
                                 key={item.encodeId}
@@ -120,7 +120,7 @@ const ChartMusic = () => {
                         ))}
                         <Link to={Path.ZING_CHART} className='text-white px-2 py-1 rounded-l-full rounded-r-full border border-white w-fit m-auto' >Xem Thêm</Link>
                     </div>
-                    <div className='flex-7 h-[90%] relative cursor-pointer'>
+                    <div className='flex-6 h-[90%] relative cursor-pointer'>
                         {data && <Line data={data} ref={chartRef} options={options} />}
                         <div
                             className='tooltip' style={{ top: tooltipState.top, left: tooltipState.left, opacity: tooltipState.opacity, position: 'absolute' }}

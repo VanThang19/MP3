@@ -6,4 +6,6 @@ export { default as Album } from './Album'
 export { default as WeekRank } from './WeekRank'
 export { default as ZingChart } from './ZingChart'
 export { default as Follow } from './Follow'
-
+export { default as Search } from './Search'
+export { default as Search_All } from './Search_All'
+export { default as Search_Songs } from './Search_Songs'

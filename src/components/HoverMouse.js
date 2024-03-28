@@ -45,7 +45,7 @@ const HoverMouse = ({ data, link, thumbnailM, artistsNames, sortDescription, tit
                 <img ref={imageRef} src={thumbnailM} alt="avatar" className='w-full h-auto rounded-lg' />
             </div>
             <span className='flex flex-col text-[#333232]' >
-                <span className='font-semibold' >{title}</span>
+                <span className='font-semibold' >{title?.length > 30 ? title.slice(0, 22) + '...' : title}</span>
                 {data?.sectionId === 'h100' ? <span> {artistsNames} </span> : <span>{sortDescription?.length >= 40 ? `${sortDescription?.slice(0, 30)}...` : sortDescription}</span>}
             </span>
         </div>

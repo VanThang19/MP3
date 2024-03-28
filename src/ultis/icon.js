@@ -11,7 +11,7 @@ import { IoMdSkipBackward, IoMdSkipForward } from "react-icons/io";
 import { BiSolidPlaylist } from "react-icons/bi";
 import { FiVolumeX, FiVolume1, FiVolume2 } from "react-icons/fi";
 import { RiDeleteBin5Line } from "react-icons/ri";
-
+import { TiUserAdd } from "react-icons/ti";
 
 const icons = {
     MdOutlineLibraryMusic,
@@ -38,6 +38,7 @@ const icons = {
     FiVolume2,
     FiVolumeX,
     PiPlayCircleThin,
-    RiDeleteBin5Line
+    RiDeleteBin5Line,
+    TiUserAdd
 }
 export default icons

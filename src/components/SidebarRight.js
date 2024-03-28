@@ -56,7 +56,7 @@ const SidebarRight = () => {
                                     title={item?.title.length > 25 ? `${item?.title.slice(0, 25)}...` : item?.title}
                                     sid={item?.sid}
                                     artists={item?.artists.length > 17 ? `${item?.artists.slice(0, 17)}...` : item?.artists}
-                                    sm
+                                    size='w-[40px] h-[40px]'
                                 />
                             ))}
                         </div>}
@@ -88,7 +88,7 @@ const SidebarRight = () => {
                                     title={item?.title.length > 25 ? `${item?.title.slice(0, 25)}...` : item?.title}
                                     sid={item?.encodeId}
                                     artists={item?.artistsNames.length > 17 ? `${item?.artistsNames.slice(0, 17)}...` : item?.artistsNames}
-                                    sm
+                                    size='w-[40px] h-[40px]'
                                 />
                             ))}
                         </div>}

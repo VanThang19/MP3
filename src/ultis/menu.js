@@ -24,3 +24,18 @@ export const sidebarMenu = [
         icons: <AiTwotoneFileText size={23} />
     },
 ]
+export const searchMenu = [
+    {
+        Path: 'tat-ca',
+        text: 'TẤT CẢ',
+    },
+    {
+        Path: 'bai-hat',
+        text: 'BÀI HÁT',
+        end: true,
+    },
+    {
+        Path: 'playlist',
+        text: 'PLAYLIST/ALBUM',
+    }
+]

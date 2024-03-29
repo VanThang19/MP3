@@ -1,6 +1,6 @@
 // react-icons : thư viện icon react
 import { MdOutlineLibraryMusic } from 'react-icons/md'
-import { IoSearchCircleOutline, IoRepeatOutline } from 'react-icons/io5'
+import { IoSearchCircleOutline, IoRepeatOutline, IoCloseSharp } from 'react-icons/io5'
 import { LiaChartLineSolid } from "react-icons/lia";
 import { AiTwotoneFileText } from "react-icons/ai";
 import { PiArrowRightThin, PiRepeatOnceFill } from "react-icons/pi";
@@ -39,6 +39,7 @@ const icons = {
     FiVolumeX,
     PiPlayCircleThin,
     RiDeleteBin5Line,
-    TiUserAdd
+    TiUserAdd,
+    IoCloseSharp
 }
 export default icons

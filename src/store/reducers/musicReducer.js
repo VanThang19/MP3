@@ -9,7 +9,8 @@ const initState = {
     songs: null,
     curAlbumId: null,
     recentSongs: [],
-    searchData: {}
+    searchData: {},
+    keyword: ''
 }
 
 // state : biến lưu giá trị của Reducer quản lí 
@@ -65,7 +66,8 @@ const musicReducer = (state = initState, action) => {
         case actionTypes.SEARCH:
             return {
                 ...state,
-                searchData: action.data || {}
+                searchData: action.data || {},
+                keyword: action.keyword || ''
             }
         default:
             return state

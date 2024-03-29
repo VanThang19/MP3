@@ -34,7 +34,7 @@ export const search = (keyword) => async (dispatch) => {
     try {
         const response = await apis.apiSearch(keyword)
         if (response.data.err === 0) {
-            dispatch({ type: actionTypes.SEARCH, data: response.data.data })
+            dispatch({ type: actionTypes.SEARCH, data: response.data.data, keyword })
         } else {
             dispatch({ type: actionTypes.SEARCH, data: null })
         }

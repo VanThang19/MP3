@@ -4,6 +4,7 @@ import * as actions from '../store/actions'
 import { useDispatch } from 'react-redux'
 import { createSearchParams, useNavigate } from 'react-router-dom'
 import Path from '../ultis/Path'
+import { IoCloseSharp } from 'react-icons/io5'
 
 const { GoSearch } = icons
 
@@ -25,7 +26,8 @@ const Search = () => {
         }
     }
     return (
-        <div className='w-full flex items-center'>
+        <div className='w-full flex relative items-center'>
+            {keyword && <span onClick={() => setKeyword('')} className='absolute right-[16px] cursor-pointer ' ><IoCloseSharp />  </span>}
             <span className='h-10 pl-4 bg-[#f3f3f3] flex items-center justify-center rounded-l-[20px] text-gray-600'>
                 <GoSearch size={24} />
             </span>

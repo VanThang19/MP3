@@ -58,13 +58,14 @@ const Search_All = () => {
                 </div>
                 <div className='flex flex-col w-full gap-[20px]' >
                     <h3 className='text-lg font-bold mb-5' >Nghệ sĩ</h3>
-                    <div className='flex items-start justify-between gap-[28px]' >
+                    <div className='flex  gap-[28px]' >
                         {searchData?.artists?.slice(0, 5).map(item => (
                             <Artist
                                 key={item.id}
                                 title={item.name}
                                 image={item.thumbnailM}
                                 follower={item.totalFollow}
+                                link={item.link}
                             />
                         ))}
                     </div>

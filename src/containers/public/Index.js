@@ -9,3 +9,6 @@ export { default as Follow } from './Follow'
 export { default as Search } from './Search'
 export { default as Search_All } from './Search_All'
 export { default as Search_Songs } from './Search_Songs'
+export { default as Singer } from './Singer'
+export { default as SearchPlaylist } from './SearchPlaylist'
+

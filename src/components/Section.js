@@ -11,7 +11,7 @@ const Section = ({ data }) => {
                 <span className='text-xs'>TẤT CẢ</span>
             </div>
             <div className='flex items-start justify-between gap-[28px]' >
-                {data && data?.items?.length > 0 && data?.items.slice(0, 5).map(item => (
+                {data && data?.items?.length > 0 && data?.items.filter((item, index) => index <= 4)?.map(item => (
                     <HoverMouse
                         key={item.encodeId}
                         data={data}

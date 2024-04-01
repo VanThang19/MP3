@@ -70,7 +70,7 @@ const SidebarRight = () => {
                             title={curSongData.title.length > 15 ? `${curSongData.title.slice(0, 15)}...` : curSongData.title}
                             sid={curSongData.encodeId}
                             artists={curSongData.artistsNames.length > 17 ? `${curSongData.artistsNames.slice(0, 17)}...` : curSongData.artistsNames}
-                            sm
+                            size='w-[40px] h-[40px]'
                             style={'bg-main-500 text-white'}
                         />
                         <div className='flex flex-col text-black pt-[15px] px-2 pb-[5px]'>

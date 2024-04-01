@@ -5,7 +5,6 @@ import { SongItem, ListItemSong, HoverMouse, Artist } from '../../components'
 
 const Search_All = () => {
     const { searchData } = useSelector(state => state.music)
-    console.log(searchData)
     return (
         <div className='w-full flex flex-col px-[60px]'>
             <div className='flex flex-col gap-[20px]' >

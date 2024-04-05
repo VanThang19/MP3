@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
-import { Slider, Section, NewRelease, ChartMusic } from '../../components';
+import { Sliders, Section, NewRelease, ChartMusic } from '../../components';
 import { Link } from 'react-router-dom';
 
 
@@ -9,7 +9,8 @@ const Home = () => {
     const { chill, RemixMusic, MoodMusic, Top100, Album_Hot, weekChart } = useSelector(state => state.app)
     return (
         <div className='overflow-y-auto'>
-            <Slider />
+            <div className='w-full h-[70px]'></div>
+            <Sliders />
             <NewRelease />
             <Section data={chill} />
             <Section data={RemixMusic} />

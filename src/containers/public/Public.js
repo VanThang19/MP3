@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { Player, SidebarLeft, SidebarRight, Header } from '../../components'
 import Scrollbars from 'react-custom-scrollbars-2';
 
 // Outlet - Route : được sử dụng để hiển thị nội dung của các tuyến con trong một tuyến cha
 const Public = () => {
     const [isShowRightSidebar, setIsShowRightSidebar] = useState(true)
+    const { singer } = useParams()
 
     return (
         <div className='w-full relative h-screen flex-col bg-main-300' >
@@ -14,7 +15,7 @@ const Public = () => {
                     <SidebarLeft />
                 </div>
                 <div className='flex-auto flex flex-col' >
-                    <div className=' h-[70px] flex-none px-[59px] flex items-center'>
+                    <div className={`h-[70px] ${singer ? 'bg-transparent' : 'bg-main-300'} fixed right-[329px] left-[240px] top-0 px-[59px] z-50 flex items-center`}>
                         <Header />
                     </div>
                     <div className=' flex-auto w-full' >

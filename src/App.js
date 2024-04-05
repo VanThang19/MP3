@@ -37,6 +37,7 @@ function App() {
             <Route path={Path.ZING_CHART} element={<ZingChart />} />
             <Route path={Path.FOLLOW} element={<Follow />} />
             <Route path={Path.HOME__SINGER} element={<Singer />} />
+            <Route path={Path.HOM__ARTIST__SINGER} element={<Singer />} />
 
             <Route path={Path.SEARCH} element={<Search />} >
               <Route path={Path.ALL} element={<Search_All />} />

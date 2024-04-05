@@ -4,7 +4,7 @@ import { getArrSlider } from '../ultis/fn'
 import * as actions from '../store/actions'
 import { useNavigate } from 'react-router-dom'
 
-const Slider = () => {
+const Sliders = () => {
 
     const { banner } = useSelector(state => state.app)
     const dispatch = useDispatch()
@@ -78,4 +78,4 @@ const Slider = () => {
     )
 }
 
-export default Slider
+export default Sliders

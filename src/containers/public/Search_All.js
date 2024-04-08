@@ -3,19 +3,21 @@ import { useSelector } from 'react-redux'
 import { handleNumberFollow } from '../../ultis/fn'
 import { SongItem, ListItemSong, HoverMouse, Artist } from '../../components'
 
-const Search_All = () => {
+const Search_All = ({ link }) => {
     const { searchData } = useSelector(state => state.music)
     return (
         <div className='w-full flex flex-col px-[60px]'>
             <div className='flex flex-col gap-[20px]' >
                 <h3 className='text-lg font-bold mb-5' >Nổi bật</h3>
                 <div className='flex gap-8' >
-                    {searchData?.top && <div className='p-[10px] flex-1 bg-main-200 rounded-md flex gap-8 items-center cursor-pointer   ' >
+                    {searchData?.top && <div className='p-[10px] flex-1 bg-main-200 rounded-md flex gap-8 items-center' >
+
                         <img src={searchData.top.thumbnail} alt='avatar' className={`w-[84px] h-[84px] object-cover ${searchData.top.objectType === 'artist' && 'rounded-full'}`} />
+
                         <div className='flex flex-col text-xs' >
                             <span className='mb-[6px]' >{searchData.top.objectType === 'artist' ? 'Nghệ sĩ' : ''}</span>
                             <span className='text-sm font-semibold' >{searchData.top.title || searchData.top.name}</span>
-                            {searchData.top.objectType === 'artist' && <span>{handleNumberFollow(searchData?.artists[0]?.totalFollow) + 'quan tâm'}</span>}
+                            {searchData.top.objectType === 'artist' && <span>{handleNumberFollow(searchData?.artists[0]?.totalFollow) + ' quan tâm'}</span>}
                         </div>
                     </div>}
                     {searchData?.songs?.filter((item, index) => [...Array(2).keys()].some(i => i === index))?.map(item => (

@@ -10,7 +10,7 @@ const Section = ({ data }) => {
                 <h3 className='text-[20px] font-bold' >{data?.title}</h3>
                 <span className='text-xs'>TẤT CẢ</span>
             </div>
-            <div className='flex items-start justify-between gap-[28px]' >
+            <div className='flex' >
                 {data && data?.items?.length > 0 && data?.items.filter((item, index) => index <= 4)?.map(item => (
                     <HoverMouse
                         key={item.encodeId}

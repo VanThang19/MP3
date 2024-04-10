@@ -51,7 +51,7 @@ const NewRelease = () => {
                     <div key={item.encodeId} className='w-[45%] min-[1080px]:w-[30%]'>
                         <SongItem
                             thumbnail={item.thumbnail}
-                            title={item.title}
+                            title={item.title.length > 15 ? `${item.title.slice(0, 15)}...` : item.title}
                             artists={item.artistsNames}
                             releaseDate={item.releaseDate}
                             sid={item.encodeId}

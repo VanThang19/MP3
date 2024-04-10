@@ -8,6 +8,7 @@ const { PiArrowLeftThin, PiArrowRightThin } = icons
 const Header = () => {
   const navigate = useNavigate()
   const { singer } = useParams()
+
   return (
     <div className='flex justify-between w-full'>
       <div className='flex gap-6 w-full items-center'>

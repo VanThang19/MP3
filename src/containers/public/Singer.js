@@ -4,13 +4,17 @@ import { apiGetArtist } from '../../apis'
 import icons from '../../ultis/icon'
 import { Section, SongItem } from '../../components'
 import { Artist } from '../../components'
+import { useSelector } from 'react-redux'
+
+
+
+
 const { TiUserAdd, BsPlayFill } = icons
 
 const Singer = () => {
     const { singer } = useParams()
     const [artistData, setArtistData] = useState(null)
     const ref = useRef()
-
     //Lấy dữ liệu của ca sĩ - nghệ sĩ
     useEffect(() => {
         const GetArtistData = async () => {

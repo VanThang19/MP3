@@ -11,7 +11,8 @@ const initState = {
     newRelease: {},
     weekChart: [],
     chart: {},
-    rank: []
+    rank: [],
+    scrollTop: true,
 
 }
 
@@ -32,6 +33,11 @@ const appReducer = (state = initState, action) => {
                 weekChart: action.homeData?.find(item => item.sectionType === 'weekChart')?.items || [],
                 chart: action.homeData?.find(item => item.sectionId === 'hZC')?.chart || {},
                 rank: action.homeData?.find(item => item.sectionId === 'hZC')?.items || [],
+            }
+        case actionTypes.ZERO_SCROLTOP:
+            return {
+                ...state,
+                scrollTop: action.flag
             }
         default:
             return state

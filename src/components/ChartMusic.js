@@ -1,7 +1,6 @@
 import React, { memo, useState, useEffect, useRef } from 'react'
-import { Line } from 'react-chartjs-2';
-import { Chart } from 'chart.js/auto'
 import bgchart from '../image/bg_chart.jpg'
+import { Line } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
 import { SongItem } from './'
 import _ from 'lodash'

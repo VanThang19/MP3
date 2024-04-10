@@ -9,7 +9,9 @@ const actionTypes = {
     PLAY: "PLAY",
     SET_ALBUM: 'SET_ALBUM',
     PLAYLIST: 'PLAYLIST',
-    SEARCH: 'SEARCH'
+    SEARCH: 'SEARCH',
+    ZERO_SCROLTOP: 'ZERO_SCROLTOP',
+
 
 }
 export default actionTypes

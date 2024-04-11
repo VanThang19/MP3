@@ -19,8 +19,8 @@ const SearchPlaylist = () => {
 
     return (
         <div className='w-full flex-col flex gap-8 px-[44px]' >
-            <h3>SearchPlaylist</h3>
-            <div className='flex items-start flex-wrap justify-between' >
+            <h3 className='font-bold' >Playlist/Album</h3>
+            <div className='flex items-start flex-wrap justify-start' >
                 {playlist && playlist?.items?.length > 0 && playlist?.items?.map(item => (
                     <HoverMouse
                         key={item.encodeId}

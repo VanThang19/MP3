@@ -7,6 +7,7 @@ import _ from 'lodash'
 import { Link } from 'react-router-dom';
 import Path from '../ultis/Path';
 import icons from '../ultis/icon';
+import { Chart } from 'chart.js/auto';
 
 const { BsPlayFill } = icons
 

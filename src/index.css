@@ -2,18 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-input[type="range"]{
-    accent-color: #0e8080;
-}
-.text-shadow-first {
-    text-shadow: 1px 1px 0 rgb(74, 144, 226), -1px 1px 0 rgb(74, 144, 226), -1px -1px 0 rgb(74, 144, 226),
-    1px -1px 0 rgb(74, 144, 226), ;
-}
-.text-shadow-second {
-    text-shadow: 1px 1px 0 rgb(80, 227, 194), -1px 1px 0 rgb(80, 227, 194), -1px -1px 0 rgb(80, 227, 194),
-    1px -1px 0 rgb(80, 227, 194), ;
-}
-.text-shadow-third {
-    text-shadow: 1px 1px 0 rgb(227, 80, 80), -1px 1px 0 rgb(227, 80, 80), -1px -1px 0 rgb(227, 80, 80),
-    1px -1px 0 rgb(227, 80, 80), ;
-}
+
+.text-shadow-no1 {
+    text-shadow:
+      1px 1px 0 rgba(74, 144, 226, 0.8),  
+      -1px 1px 1px rgba(74, 144, 226, 0.5), 
+      -1px -1px 1px rgba(74, 144, 226, 0.5), 
+      1px -1px 1px rgba(74, 144, 226, 0.5);  
+  }
+  .text-shadow-no2 {
+    text-shadow:
+      1px 1px 0 rgba(80, 227, 194, 0.8),  /* Bóng đổ trong cùng, rõ nét */
+      -1px 1px 0 rgba(80, 227, 194, 0.5),  /* Bóng đổ bên phải, mờ hơn */
+      -1px -1px 0 rgba(80, 227, 194, 0.5),  /* Bóng đổ bên dưới, mờ hơn */
+      1px -1px 0 rgba(80, 227, 194, 0.5);   /* Bóng đổ bên trái, mờ hơn */
+  }
+  .text-shadow-no3 {
+    text-shadow:
+      0.5px 0.5px 0 rgba(227, 80, 80),  
+      -0.5px 0.5px 0 rgba(227, 80, 80, 0.5),
+      -0.5px -0.5px 0 rgba(227, 80, 80, 0.5), 
+      0.5px -0.5px 0 rgba(227, 80, 80, 0.5);  
+  }
+  .text-shadow-rest {
+    text-shadow:
+      0.5px 0.5px 0 rgba(0,0,0 ),  
+      -0.5px 0.5px 0 rgba(0, 0, 8, 0.5),
+      -0.5px -0.5px 0 rgba(0, 0, 0, 0.5), 
+      0.5px -0.5px 0 rgba(0, 0, 0, 0.5);  
+  }

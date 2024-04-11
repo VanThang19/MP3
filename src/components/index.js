@@ -15,3 +15,5 @@ export { default as NewRelease } from "./NewRelease"
 export { default as HoverMouse } from "./HoverMouse"
 export { default as ChartMusic } from "./ChartMusic"
 export { default as Artist } from "./Artist"
+export { default as Rankbox } from "./Rankbox"
+

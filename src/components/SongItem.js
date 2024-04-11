@@ -15,7 +15,9 @@ const SongItem = ({ thumbnail, title, sid, artists, releaseDate, order, percent,
             }}
             className={`w-full flex p-[10px] gap-[10px] rounded-md justify-between items-center cursor-pointer ${style || 'text-black hover:bg-main-200 '}`}>
             <div className='flex gap-4'>
-                {order && <span className={`${order === 1 ? 'text-shadow-first' : order === 2 ? 'text-shadow-second' : 'text-shadow-third'} text-white text-[32px] m-auto`} >{order}</span>}
+                {order && <span
+                    className={`${order === 1 ? 'text-shadow-no1' : order === 2 ? 'text-shadow-no2' : 'text-shadow-no3'} text-[rgba(77,34,104,0.9)] text-[32px] m-auto`}
+                >{order}</span>}
 
                 <img src={thumbnail} alt='thumbnail' className={`${size || 'w-[60px] h-[60px]'}object-cover rounded-md `} />
 

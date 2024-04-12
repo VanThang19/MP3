@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux'
 const Public = () => {
     const [isShowRightSidebar, setIsShowRightSidebar] = useState(true)
     const { scrollTop } = useSelector(state => state.app)
-
+    const { curSongId } = useSelector(state => state.music)
     const dispatch = useDispatch()
 
     const handleScrollTop = (e) => {
@@ -46,9 +46,9 @@ const Public = () => {
                 </div>}
             </div>
 
-            <div className='fixed bottom-0 left-0 right-0 h-[90px]'>
+            {curSongId && <div className='fixed bottom-0 left-0 right-0 h-[90px]'>
                 <Player setIsShowRightSidebar={setIsShowRightSidebar} />
-            </div>
+            </div>}
         </div>
     );
 };

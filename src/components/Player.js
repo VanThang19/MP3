@@ -150,7 +150,7 @@ const Player = ({ setIsShowRightSidebar }) => {
     }
 
     return (
-        <div className='bg-main-400 px-5 h-full flex py-2'>
+        <div className='bg-main-400 px-5 h-full flex'>
             <div className='w-[30%] flex-auto flex gap-3 items-center' >
                 <img src={songInfo?.thumbnail} alt='thumbnail' className='w-16 h-16 object-cover rounded-md' />
                 <div className='flex flex-col' >
@@ -201,7 +201,7 @@ const Player = ({ setIsShowRightSidebar }) => {
                     <span >{moment.utc(songInfo?.duration * 1000).format('mm:ss')}</span>
                 </div>
             </div>
-            <div className='w-[30%] flex-auto flex items-center justify-end gap-4' >
+            <div className='w-[30%] hidden flex-auto min-[850px]:flex items-center justify-end gap-4' >
                 <div className='flex items-center gap-2' >
                     <span onClick={() => setVolume(prev => +prev === 0 ? 30 : 0)} >{+volume >= 50 ? <FiVolume2 /> : +volume === 0 ? <FiVolumeX /> : <FiVolume1 />}</span>
                     <input

@@ -46,24 +46,41 @@ const ChartMusic = () => {
             tooltip: {
                 enabled: false,
                 external: (ctx) => {
-                    const data = []
-                    for (let i = 0; i < 3; i++)//lấy 3 phần tử xếp hạng 
-                        data.push({
-                            encodeId: Object.keys(chart?.items)[i], // key = encodeId của bài hát đc xếp hạng
-                            data: chart?.items[Object.keys(chart?.items)[i]]?.filter(item => +item.hour % 2 === 0)?.map(item => item.counter)
-                        })// lấy dữ liệu bài hát - giờ / hết cho 2 truyền vào counter
-                    const tooltipModel = (ctx).tooltip
-                    setTooltipData(data.find(i => i.data.some(n => n === +tooltipModel.body[0].lines[0].replace(',', '')))?.encodeId)
-                    if (tooltipModel.opacity === 0) {
-                        if (tooltipState.opacity !== 0) setTooltipState(prev => ({ ...prev, opacity: 0 }))
-                        return
+                    const tooltipModel = ctx.tooltip;
+                    if (!tooltipModel || !tooltipModel.body || !tooltipModel.body[0] || !tooltipModel.body[0].lines || !tooltipModel.body[0].lines[0]) {
+                        return;
                     }
+
+                    const lineValue = tooltipModel.body[0].lines[0].replace(',', '');
+                    const data = [];
+                    for (let i = 0; i < 3; i++) {
+                        const encodeId = Object.keys(chart?.items)[i];
+                        const itemData = chart?.items[encodeId]?.filter(item => +item.hour % 2 === 0)?.map(item => item.counter);
+                        data.push({ encodeId, data: itemData });
+                    }
+
+                    const foundData = data.find(i => i.data.some(n => n === +lineValue));
+                    if (!foundData) {
+                        return;
+                    }
+
+                    setTooltipData(foundData.encodeId);
+
+                    if (tooltipModel.opacity === 0) {
+                        if (tooltipState.opacity !== 0) {
+                            setTooltipState(prev => ({ ...prev, opacity: 0 }));
+                        }
+                        return;
+                    }
+
                     const newTooltipData = {
                         opacity: 1,
                         left: tooltipModel.caretX,
                         top: tooltipModel.caretY,
+                    };
+                    if (!_.isEqual(tooltipState, newTooltipData)) {
+                        setTooltipState(newTooltipData);
                     }
-                    if (!_.isEqual(tooltipState, newTooltipData)) setTooltipState(newTooltipData)
                 }
             }
         },
@@ -71,7 +88,7 @@ const ChartMusic = () => {
             mode: 'dataset',
             intersect: false
         }
-    }
+    };
 
     // Set #ZINGCHART
     useEffect(() => {

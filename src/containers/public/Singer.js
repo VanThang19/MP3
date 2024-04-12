@@ -4,7 +4,6 @@ import { apiGetArtist } from '../../apis'
 import icons from '../../ultis/icon'
 import { Section, SongItem } from '../../components'
 import { Artist } from '../../components'
-import { useSelector } from 'react-redux'
 
 
 

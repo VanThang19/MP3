@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 
+
+input[type="range"]{
+  accent-color: #0e8080;
+}
+
 .text-shadow-no1 {
     text-shadow:
       1px 1px 0 rgba(74, 144, 226, 0.8),  

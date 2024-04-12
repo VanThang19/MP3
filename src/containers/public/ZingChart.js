@@ -7,10 +7,13 @@ import _ from 'lodash'
 import { Chart } from 'chart.js/auto';
 
 
+
 export const ZingChart = () => {
     const [chartData, setChartData] = useState(null)
     const [data, setData] = useState(null)
     const chartRef = useRef()
+    const ref = useRef()
+
     const [tooltipState, setTooltipState] = useState({
         opacity: 0,
         top: 0,
@@ -94,11 +97,14 @@ export const ZingChart = () => {
             setData({ labels, datasets })
         }
     }, [chartData])
-    console.log(chartData)
+    ///ScrollOntop
+    useEffect(() => {
+        ref.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
+    }, [chartData])
 
     return (
         <div>
-            <div className='flex flex-col'>
+            <div ref={ref} className='flex flex-col'>
                 <div className=' relative'>
                     <img src={bg_chart} alt='bg_chart' className='w-full h-[500px] object-cover grayscale' />
                     <div className='absolute top-0 left-0 right-0 bottom-0 bg-[rgba(206,217,217,0.9)]' ></div>

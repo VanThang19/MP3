@@ -113,7 +113,7 @@ const ChartMusic = () => {
     }, [chart])
 
     return (
-        <div className='px-[59px] mt-12 relative max-h-[430px]'>
+        <div className='px-[59px] mt-12 relative min-[1050px]:max-h-[430px] h-[760px] rounded-md'>
             <img src={bgchart} alt="bg-chart" className='w-full object-cover rounded-md max-h-[430px]' />
             <div className='absolute top-0 z-10 left-[59px] bg-[rgba(77,34,104,0.9)] right-[59px] bottom-0 rounded-md'></div>
             <div className='absolute top-0 z-20 left-[59px] right-[59px] bottom-0 p-5 flex flex-col gap-8'>
@@ -121,7 +121,7 @@ const ChartMusic = () => {
                     <h3 className='text-2xl font-bold'>#zingchart</h3>
                     <span className='rounded-full p-1 bg-white' ><BsPlayFill size={20} color='black' /></span>
                 </Link>
-                <div className='flex gap-4 h-full'>
+                <div className='min-[1050px]:flex-row flex flex-col gap-4 h-full'>
                     <div className='flex-4 flex flex-col gap-4'>
                         {rank?.filter((i, index) => index < 3)?.map((item, index) => (
                             <SongItem
@@ -137,7 +137,7 @@ const ChartMusic = () => {
                         ))}
                         <Link to={Path.ZING_CHART} className='text-white px-2 py-1 rounded-l-full rounded-r-full border border-white w-fit m-auto' >Xem Thêm</Link>
                     </div>
-                    <div className='flex-6 h-[90%] relative cursor-pointer'>
+                    <div className='flex-6 h-[90%] order-first min-[1050px]:order-last min-[1050px]:w- relative cursor-pointer'>
                         {data && <Line data={data} ref={chartRef} options={options} />}
                         <div
                             className='tooltip' style={{ top: tooltipState.top, left: tooltipState.left, opacity: tooltipState.opacity, position: 'absolute' }}

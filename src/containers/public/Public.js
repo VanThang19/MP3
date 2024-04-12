@@ -29,7 +29,7 @@ const Public = () => {
                     <SidebarLeft />
                 </div>
                 <div className='flex-auto flex flex-col' >
-                    <div className={`h-[70px] ${scrollTop ? 'bg-transparent' : 'bg-main-300'} fixed right-[329px] left-[240px] top-0 px-[59px] z-50 flex items-center`}>
+                    <div className={`h-[70px] ${scrollTop ? 'bg-transparent' : 'bg-main-300'} fixed top-0 left-[240px] ${isShowRightSidebar ? '1600:right-[329px] right-0' : 'right-0'} px-[59px] z-50 flex items-center`}>
                         <Header />
                     </div>
                     <div className=' flex-auto w-full' >

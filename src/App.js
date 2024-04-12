@@ -22,6 +22,27 @@ function App() {
   const dispatch = useDispatch()
   const [weekChart, setWeekChart] = useState(null)
 
+  //lấy độ rộng khi khởi chạy
+  const [currentWidth, setCurrentWidth] = useState(window.innerWidth)
+
+  //set width khi trở lại kích thước
+  const setWidth = (e) => {
+    setCurrentWidth(e.target.innerWidth)
+  }
+  useEffect(() => {
+    window.addEventListener('resize', setWidth)
+
+    return () => {
+      window.removeEventListener('resize', setWidth)
+    }
+  }, [])
+
+  //tryền kích thước cho các pages
+  useEffect(() => {
+    dispatch(actions.setCurrentWidth(currentWidth))
+  }, [currentWidth])
+
+
   useEffect(() => {
     dispatch(actions.getHomePage())
     const GetChartData = async () => {
@@ -46,15 +67,11 @@ function App() {
             <Route path={Path.FOLLOW} element={<Follow />} />
             <Route path={Path.HOME__SINGER} element={<Singer />} />
             <Route path={Path.HOM__ARTIST__SINGER} element={<Singer />} />
-
             <Route path={Path.SEARCH} element={<Search />} >
               <Route path={Path.ALL} element={<Search_All />} />
               <Route path={Path.SONG} element={<Search_Songs />} />
               <Route path={Path.PLAYLIST_SEARCH} element={<SearchPlaylist />} />
-
             </Route>
-
-
 
             <Route path={Path.STAR} element={<Home />} />
           </Route>

@@ -11,6 +11,7 @@ const actionTypes = {
     PLAYLIST: 'PLAYLIST',
     SEARCH: 'SEARCH',
     ZERO_SCROLTOP: 'ZERO_SCROLTOP',
+    CURRENT_WIDTH: 'CURRENT_WIDTH'
 
 
 }

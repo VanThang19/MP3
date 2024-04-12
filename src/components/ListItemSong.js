@@ -19,7 +19,7 @@ const ListItemSong = ({ songData, isHideAlbum, isHideNode, order }) => {
                 dispatch(actions.setReCent({ sid: songData?.encodeId, thumbnail: songData?.thumbnail, title: songData?.title, artists: songData?.artistsNames }))
             }}
         >
-            <div className=' flex-2 flex items-center gap-3'>
+            <div className=' flex-7 flex items-center gap-3'>
                 {order && <span
                     className={`${order === 1 ? 'text-shadow-no1' : order === 2 ? 'text-shadow-no2' : order === 3 ? 'text-shadow-no3' : 'text-shadow-rest'} text-gray-300 text-[32px] flex items-center justify-center flex-none w-[15%]`}
                 >{order}</span>}
@@ -30,7 +30,7 @@ const ListItemSong = ({ songData, isHideAlbum, isHideNode, order }) => {
                     <span className='text-xs opacity-70 inline-block' >{songData?.artistsNames.length > 10 ? `${songData?.artistsNames.slice(0, 10)}...` : songData?.artistsNames}</span>
                 </span>
             </div>
-            {!isHideAlbum && <div className='flex-4 flex items-center justify-center text-xs'>
+            {!isHideAlbum && <div className='flex-3 flex items-center justify-center text-xs'>
                 {songData?.album?.title?.length > 30 ? `${songData?.album?.title?.slice(0, 30)} ...` : songData?.album?.title}
             </div>}
             <div className='flex-1 flex justify-end text-xs opacity-70'>

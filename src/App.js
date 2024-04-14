@@ -54,7 +54,7 @@ function App() {
   return (
     <>
 
-      <div className='' >
+      <div  >
         <Routes>
           <Route path={Path.PUBLIC} element={<Public />} >
             <Route path={Path.HOME} element={<Home />} />
@@ -72,7 +72,6 @@ function App() {
               <Route path={Path.SONG} element={<Search_Songs />} />
               <Route path={Path.PLAYLIST_SEARCH} element={<SearchPlaylist />} />
             </Route>
-
             <Route path={Path.STAR} element={<Home />} />
           </Route>
         </Routes>

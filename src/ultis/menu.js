@@ -1,6 +1,6 @@
 import icons from "./icon"
 
-const { MdOutlineLibraryMusic, IoSearchCircleOutline, LiaChartLineSolid, AiTwotoneFileText } = icons
+const { MdOutlineLibraryMusic, IoSearchCircleOutline, LiaChartLineSolid, AiTwotoneFileText, BsChatDots } = icons
 export const sidebarMenu = [
     {
         Path: 'mymusic',
@@ -11,7 +11,7 @@ export const sidebarMenu = [
         Path: '',
         text: 'Khám Phá',
         end: true,
-        icons: <IoSearchCircleOutline size={26} />
+        icons: <IoSearchCircleOutline size={28} />
     },
     {
         Path: 'zingchart',
@@ -22,6 +22,11 @@ export const sidebarMenu = [
         Path: 'follow',
         text: 'Theo dõi',
         icons: <AiTwotoneFileText size={23} />
+    },
+    {
+        Path: 'chat',
+        text: 'Nhắn tin',
+        icons: <BsChatDots size={22} />
     },
 ]
 export const searchMenu = [

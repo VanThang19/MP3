@@ -6,7 +6,7 @@ import { AiTwotoneFileText } from "react-icons/ai";
 import { PiArrowRightThin, PiRepeatOnceFill } from "react-icons/pi";
 import { PiArrowLeftThin, PiShuffleFill, PiMusicNotesSimple, PiPlayCircleThin } from "react-icons/pi";
 import { GoSearch, GoHeart, GoHeartFill } from "react-icons/go";
-import { BsThreeDots, BsPlayFill, BsPauseFill, BsDot } from "react-icons/bs";
+import { BsThreeDots, BsPlayFill, BsPauseFill, BsDot, BsChatDots } from "react-icons/bs";
 import { IoMdSkipBackward, IoMdSkipForward } from "react-icons/io";
 import { BiSolidPlaylist } from "react-icons/bi";
 import { FiVolumeX, FiVolume1, FiVolume2 } from "react-icons/fi";
@@ -40,6 +40,7 @@ const icons = {
     PiPlayCircleThin,
     RiDeleteBin5Line,
     TiUserAdd,
-    IoCloseSharp
+    IoCloseSharp,
+    BsChatDots
 }
 export default icons
